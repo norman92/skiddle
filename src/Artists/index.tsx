@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { SkiddleArtist } from "../../types/SkiddleArtist";
-import SkiddleResponse from "../../types/SkiddleResponse";
 import { useParams } from "react-router-dom";
+import { getArtist } from "../api";
 
 function Artists() {
   const { id } = useParams();
   const [artist, setArtist] = useState<SkiddleArtist | null>(null);
   useEffect(() => {
-    async function getArtist() {
-      const { data } = await axios.get<SkiddleResponse<SkiddleArtist>>(
-        `http://localhost/oejfpowejfwe`
-        //`https://www.skiddle.com/api/v1/artist/${id}?api_key=008f1e6099ecc48e990e3776784d447b`
-      );
-      setArtist(data.results);
+    async function loadArtist() {
+      const result = await getArtist(id);
+      setArtist(result);
     }
-    getArtist();
+    loadArtist();
   }, [id]);
   if (artist) {
     return (

@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import SkiddleEvent from "../../types/SkiddleEvent";
-import SkiddleResponse from "../../types/SkiddleResponse";
 import { useParams, Link } from "react-router-dom";
+import { getEvent } from "../api";
 
 function Details() {
   const { id } = useParams();
   const [event, setEvent] = useState<SkiddleEvent | null>(null);
   useEffect(() => {
-    async function getEvent() {
-      const { data } = await axios.get<SkiddleResponse<SkiddleEvent>>(
-        `https://www.skiddle.com/api/v1/events/${encodeURI(
-          id
-        )}?api_key=008f1e6099ecc48e990e3776784d447b`
-      );
-      setEvent(data.results);
+    async function loadEvent() {
+      const results = await getEvent(id);
+      setEvent(results);
     }
-    getEvent();
+    loadEvent();
   }, [id]);
   if (event) {
     return (
