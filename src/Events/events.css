@@ -1,0 +1,31 @@
+input.search {
+  padding: 1em;
+  width: 100%;
+  margin-bottom: 2em;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 2em;
+}
+
+.event {
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.event img {
+    width: 100%;
+}
+
+.event a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    background-color: #46C3BE;
+    text-align: center;
+    padding: 1em;
+}
